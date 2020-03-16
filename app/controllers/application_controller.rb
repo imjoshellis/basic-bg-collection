@@ -31,7 +31,7 @@ class ApplicationController < Sinatra::Base
   post "/signup" do
     if User.find_by(username: params[:username]).nil? && params[:username].size > 0 && params[:password].size > 0
       session[:user_id] = User.create(params).id
-      redirect "/success"
+      redirect "/whoami"
     else
       redirect "/signup"
     end
@@ -41,19 +41,17 @@ class ApplicationController < Sinatra::Base
     user = User.find_by(username: params[:username])
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect "/success"
+      redirect "/whoami"
     else
       redirect "/login"
     end
   end
 
-  get "/success" do
-    if session[:user_id].nil?
-      redirect "/"
-    else
+  get "/whoami" do
+    unless session[:user_id].nil?
       @user = User.find(session[:user_id])
-      erb :success
     end
+    erb :whoami
   end
 
   get "/logout" do
