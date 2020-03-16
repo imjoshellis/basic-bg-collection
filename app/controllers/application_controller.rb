@@ -30,5 +30,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/success" do
+    @user = User.find_by(session[:user_id])
+    erb :success
   end
 end
