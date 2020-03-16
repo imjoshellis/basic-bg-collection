@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20200316011551) do
 
-  create_table "boardgames", force: :cascade do |t|
+  create_table "board_games", force: :cascade do |t|
     t.string "name"
     t.string "bgg_url"
   end
