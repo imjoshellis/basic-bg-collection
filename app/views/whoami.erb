@@ -1,13 +1,31 @@
-<h1> Current data </h1>
-<p> id: <%= @user.id %> </p>
-<p> username: <%= @user.username %> </p>
-<p> board_games:</p>
-<ul>
-  <% if @user.board_games.size < 1 %>
-    <li>none</li>
+<h1 class="title"> Current data </h1>
+<div class="content">
+  <% if @user %>
+    <p> id: <%= @user.id %> </p>
+    <p> username: <%= @user.username %> </p>
+    <p> board_games:</p>
+    <ul>
+      <% if @user.board_games.size < 1 %>
+        <li>none</li>
+      <% else %>
+        <% @user.board_games.each do |bg| %>
+          <li><%= bg.name %></li>
+        <% end %>
+      <% end %>
+    </ul>
   <% else %>
-    <% @user.board_games.each do |bg| %>
-      <li><%= bg.name %></li>
-    <% end %>
+    <p>Not logged in</p>
   <% end %>
-</ul>
+  <h2>User.all</h2>
+  <ul>
+    <% User.all.each do |u| %>
+      <li><%= u.username %></li>
+    <% end %>
+  </ul>
+  <h2>BoardGame.all</h2>
+  <ul>
+    <% BoardGame.all.each do |bg| %>
+      <li><%= bg.name %> • <%= bg.bgg_url %></li>
+    <% end %>
+  </ul>
+</div>

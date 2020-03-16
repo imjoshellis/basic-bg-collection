@@ -9,6 +9,7 @@
     <title>SinatraProject</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/stylesheets/main.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
   </head>
   <body>
     <header>
@@ -16,12 +17,16 @@
         <a href="/logout"><button>Logout</button></a>
       <% end %>
     </header>
-    <div class="wrapper">
-      <%= yield %>
-      <footer class="branding">
-        <small>&copy; 2020 <strong>SinatraProject</strong></small>
-      </footer>
-    </div>
+    <section class="section is-large">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="content">
+        <small>&copy; 2020 <strong><a href="https://github.com/imjoshellis/">Josh Ellis</a></strong></small>
+      </div>
+    </footer>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <!--[if lt IE 7]>
       <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
