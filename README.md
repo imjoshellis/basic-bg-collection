@@ -34,16 +34,16 @@ A board game `has_many` users and a user `has_many` board games, so it is necess
 
 Issues and pull requests are welcome, though I'm not sure how much I'll be maintaining this project. Feel free to create your own fork and build on it as you see fit.
 
-### Flatiron Requirements
+### Flatiron Project Requirements
 
 #### Application
 
 - [x] Use Sinatra to build the app
-- [ ] Use ActiveRecord for storing information in a database
-- [ ] Include more than one model class (e.g. User, Post, Category)
-- [ ] Include at least one has_many relationship on your User model (e.g. User has_many Posts)
-- [ ] Include at least one belongs_to relationship on another model (e.g. Post belongs_to User)
-- [ ] Include user accounts with unique login attribute (username or email)
+- [x] Use ActiveRecord for storing information in a database
+- [x] Include more than one model class (e.g. User, Post, Category)
+- [x] Include at least one has_many relationship on your User model (e.g. User has_many Posts)
+- [x] Include at least one belongs_to relationship on another model (e.g. Post belongs_to User)
+- [x] Include user accounts with unique login attribute (username or email)
 - [ ] Ensure that the belongs_to resource has routes for Creating, Reading, Updating and Destroying
 - [ ] Ensure that users can't modify content created by other users
 - [ ] Include user input validations
@@ -52,10 +52,10 @@ Issues and pull requests are welcome, though I'm not sure how much I'll be maint
 
 #### Version Control
 
-- [ ] You have a large number of small Git commits
-- [ ] Your commit messages are meaningful
-- [ ] You made the changes in a commit that relate to the commit message
-- [ ] You don't include changes in a commit that aren't related to the commit message
+- [x] You have a large number of small Git commits
+- [x] Your commit messages are meaningful
+- [x] You made the changes in a commit that relate to the commit message
+- [x] You don't include changes in a commit that aren't related to the commit message
 
 ### License
 
