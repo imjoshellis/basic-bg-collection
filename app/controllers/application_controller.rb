@@ -13,11 +13,19 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/signup" do
-    erb :signup
+    if !!session[:user_id]
+      redirect "/" # redirect to index if already logged in
+    else
+      erb :signup
+    end
   end
 
   get "/login" do
-    erb :login
+    if !!session[:user_id]
+      redirect "/" # redirect to index if already logged in
+    else
+      erb :login
+    end
   end
 
   post "/signup" do
@@ -32,5 +40,10 @@ class ApplicationController < Sinatra::Base
   get "/success" do
     @user = User.find_by(session[:user_id])
     erb :success
+  end
+
+  get "/logout" do
+    session.clear
+    redirect "/"
   end
 end
