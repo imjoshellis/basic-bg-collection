@@ -12,11 +12,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js" integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/brands.min.css" integrity="sha256-G2I5BfHSSC9AXQyjI9B2w0Fue6RdgGpTAt3m2Zmzw04=" crossorigin="anonymous" />
   </head>
-  <body>
-    <header>
-      <% if session[:user_id] %>
-        <a href="/logout"><button>Logout</button></a>
-      <% end %>
+  <body class="has-background-light">
+    <header class="section has-background-white-bis">
+      <div class="container content">
+        <div class="columns is-vcentered">
+          <div class="column is-9"></div>
+          <div class="column is-3 has-text-right">
+            <% if session[:user_id] %>
+              <span>
+                Logged in as <a href="/users/<%= session[:user_id] %>/edit" class="has-text-weight-bold"><%= User.find(session[:user_id]).username %></a>
+              </span><br>
+              <a href="/logout"><span>Logout</span></a>
+            <% else %>
+              <a href="/login"><span>Login</span></a> or <a href="/signup"><span>Signup</span></a>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </header>
     <%= yield %>
     <footer class="footer">
