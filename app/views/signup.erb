@@ -1,8 +1,39 @@
-<h1>Sign Up</h1>
-<form action="/signup" method="post">
-  <label for="username">username</label>
-  <input type="text" name="username" id="username">
-  <label for="password">password</label>
-  <input type="password" name="password" id="password">
-  <button type="submit">Sign Up</button>
-</form>
+<section class="hero is-fullheight is-light">
+  <div class="hero-body">
+    <div class="container content">
+      <div class="columns">
+        <div class="column is-4 is-offset-4">
+          <h1 class="title">Sign Up</h1>
+          <form action="/signup" method="post">
+            <div class="field">
+              <label class="label">Username</label>
+              <div class="control">
+                <input class="input" type="text" name="username" id="username">
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Password</label>
+              <div class="control">
+                <input class="input" type="text" name="password" id="password">
+              </div>
+            </div>
+            <div class="columns">
+              <div class="column is-6">
+                <a href="/">
+                  <button class="button is-fullwidth">
+                    <span class="icon"><i class="fas fa-arrow-left"></i></span><span>Back</span>
+                  </button>
+                </a>
+              </div>
+              <div class="column is-6">
+                <button type="submit" class="button is-fullwidth is-link">
+                  <span class="icon"><i class="fas fa-user-plus"></i></span><span>Sign Up</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
