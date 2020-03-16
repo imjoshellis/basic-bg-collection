@@ -29,7 +29,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/signup" do
-    if User.find_by(username: params[:username]).nil? && params[:username].size > 0 && params[:password].size > 0
+    if User.find_by(username: params[:username]).nil? && !params[:username].empty? && !params[:password].empty?
       session[:user_id] = User.create(params).id
       redirect "/whoami"
     else
@@ -48,9 +48,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/whoami" do
-    unless session[:user_id].nil?
-      @user = User.find(session[:user_id])
-    end
+    @user = User.find(session[:user_id]) unless session[:user_id].nil?
     erb :whoami
   end
 
