@@ -10,6 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/stylesheets/main.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js" integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/brands.min.css" integrity="sha256-G2I5BfHSSC9AXQyjI9B2w0Fue6RdgGpTAt3m2Zmzw04=" crossorigin="anonymous" />
   </head>
   <body>
     <header>
@@ -17,11 +19,7 @@
         <a href="/logout"><button>Logout</button></a>
       <% end %>
     </header>
-    <section class="section is-large">
-      <div class="container">
-        <%= yield %>
-      </div>
-    </section>
+    <%= yield %>
     <footer class="footer">
       <div class="content">
         <small>&copy; 2020 <strong><a href="https://github.com/imjoshellis/">Josh Ellis</a></strong></small>
