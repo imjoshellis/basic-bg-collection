@@ -11,6 +11,7 @@ gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
 gem "tux"
+gem 'sysrandom'
 
 gem 'standardrb'
 gem 'htmlbeautifier'
