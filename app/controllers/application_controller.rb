@@ -5,7 +5,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, "public"
     set :views, "app/views"
     enable :sessions
-    set :session_secret, ENV.fetch("SESSION_SECRET") { SecureRandom.hex(64) }
+    set :session_secret, "70c3aaf2c43b9023a5234e931357b3d9ddbdf516fe9308a33effa54878a0a1c13c9c5ddc4a0491c9a87a6071e8b3cf1d91a57e5aff20a32e7416aa65224d3cce"
   end
 
   get "/" do
@@ -40,9 +40,7 @@ class ApplicationController < Sinatra::Base
   post "/login" do
     user = User.find_by(username: params[:username])
     if user&.authenticate(params[:password])
-
       session[:user_id] = user.id
-      binding.pry
       redirect "/success"
     else
       redirect "/login"
