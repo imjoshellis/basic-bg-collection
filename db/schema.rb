@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20200316014913) do
 
   create_table "user_games", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "boardgame_id"
+    t.integer "board_game_id"
   end
 
   create_table "users", force: :cascade do |t|
