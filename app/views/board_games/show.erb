@@ -1,6 +1,25 @@
 <section class="section has-background-light">
   <div class="container content">
     <h1 class="title"><%= @game.name %></h1>
-    <p> <%= @game.bgg_url %> </p>
+    <% unless @game.bgg_url.nil? %>
+      <p> <a href="<%= @game.bgg_url %>"><%= @game.bgg_url %></a> </p>
+    <% end %>
+    <p>Todo: pull description from bgg api</p>
+    <% if @user.nil? %>
+    <% elsif @user.board_games.include?(@game) %>
+      <form type="post" action="/board-games/<%= @game.slug %>">
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit" class="button is-danger is-outlined">
+          <span class="icon"><i class="fas fa-minus-circle"></i></span><span>Remove</span>
+        </button>
+      </form>
+    <% else %>
+      <form type="post" action="/board-games/<%= @game.slug %>">
+        <input type="hidden" name="_method" value="ADD">
+        <button type="submit" class="button is-success is-outlined">
+          <span class="icon"><i class="fas fa-plus-circle"></i></span><span>Add</span>
+        </button>
+      </form>
+    <% end %>
   </div>
 </section>

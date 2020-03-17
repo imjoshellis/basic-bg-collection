@@ -1,6 +1,6 @@
 class BoardGamesController < ApplicationController
   get "/board-games" do
-    @user = User.find(session[:user_id]) unless session[:user_id].nil?
+    @user = get_user
     erb :'/board_games/index'
   end
 
@@ -17,6 +17,11 @@ class BoardGamesController < ApplicationController
 
   get "/board-games/:slug" do
     @game = BoardGame.find_by(slug: params[:slug])
+    @user = get_user
     erb :'board_games/show'
+  end
+
+  delete "/board-games/:slug" do
+    @user = get_user
   end
 end

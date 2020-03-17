@@ -8,6 +8,10 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "70c3aaf2c43b9023a5234e931357b3d9ddbdf516fe9308a33effa54878a0a1c13c9c5ddc4a0491c9a87a6071e8b3cf1d91a57e5aff20a32e7416aa65224d3cce"
   end
 
+  def get_user
+    User.find(session[:user_id]) unless session[:user_id].nil?
+  end
+
   get "/" do
     erb :index
   end
@@ -69,7 +73,8 @@ class ApplicationController < Sinatra::Base
 
   post "/login" do
     if valid_username?(params[:username])
-      user = User.find_by(username: params[:username])
+      slug = params[:username].downcase.split(" ").join("-")
+      user = User.find_by(slug: params[:slug])
       if user&.authenticate(params[:password])
         session[:user_id] = user.id
         redirect "/whoami"
@@ -82,7 +87,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/whoami" do
-    @user = User.find(session[:user_id]) unless session[:user_id].nil?
+    @user = get_user
     erb :whoami
   end
 
