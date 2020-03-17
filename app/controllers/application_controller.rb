@@ -12,65 +12,73 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  get "/signup" do
+  def auth_routing
     if !!session[:user_id]
       redirect "/" # redirect to index if already logged in
     else
-      @error = session[:message]
-      session[:message].clear
-      erb :signup
+      @error = session[:message].dup
+      session[:message]&.clear
     end
   end
 
+  get "/signup" do
+    auth_routing
+    erb :signup
+  end
+
   get "/login" do
-    if !!session[:user_id]
-      redirect "/" # redirect to index if already logged in
-    else
-      erb :login
+    auth_routing
+    erb :login
+  end
+
+  def valid_new_username?(slug)
+    unless User.find_by(slug: slug).nil?
+      session[:message] = "exists"
+      false
     end
   end
 
   def valid_username?(username)
-    unless User.find_by(username: username).nil?
-      session[:message] = "exists"
-      return false
-    end
-    return true if username.match(/[a-zA-Z0-9\-\_]{3,12}/)
+    return true if /[a-zA-Z0-9\-\_]{3,12}/.match?(username)
 
     session[:message] = "invalid"
-    return false
+    false
   end
 
   def valid_password?(password)
-    return true if password.match(/[a-zA-Z0-9\-\_]{3,12}/)
-    
+    return true if /[a-zA-Z0-9\-\_]{3,12}/.match?(password)
+
     session[:message] = "invalid"
-    return false
+    false
   end
 
   post "/signup" do
-    if valid_username?(params[:username]) && valid_password?(params[:password])
-      user = User.new(params)
-      user.slug = user.username.downcase.split(" ").join("-") 
-      user.save
-      session[:user_id] = user.id
-      
-      redirect "/whoami"
-    else
-      
-      redirect "/signup"
+    if valid_username?(params[:username])
+      slug = params[:username].downcase.split(" ").join("-")
+      if valid_new_username?(slug) && valid_password?(params[:password])
+        user = User.new(params)
+        user.slug = slug
+        user.save
+        session[:user_id] = user.id
+
+        redirect "/whoami"
+      end
     end
+    redirect "/signup"
   end
 
   post "/login" do
-    user = User.find_by(username: params[:username])
-    if user&.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect "/whoami"
-    else
-      @error = true
-      redirect "/login"
+    if valid_username?(params[:username])
+      user = User.find_by(username: params[:username])
+      if user&.authenticate(params[:password])
+        session[:user_id] = user.id
+        redirect "/whoami"
+      else
+        session[:message] = "invalid"
+      end
     end
+
+    redirect "/login"
   end
 
   get "/whoami" do
