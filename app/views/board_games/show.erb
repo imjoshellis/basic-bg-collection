@@ -15,7 +15,6 @@
       </form>
     <% else %>
       <form type="post" action="/board-games/<%= @game.slug %>">
-        <input type="hidden" name="_method" value="ADD">
         <button type="submit" class="button is-success is-outlined">
           <span class="icon"><i class="fas fa-plus-circle"></i></span><span>Add</span>
         </button>

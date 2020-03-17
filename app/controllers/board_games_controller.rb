@@ -1,4 +1,7 @@
 class BoardGamesController < ApplicationController
+  def get_game(slug)
+    BoardGame.find_by(slug: slug)
+  end
   get "/board-games" do
     @user = get_user
     erb :'/board_games/index'
@@ -16,12 +19,20 @@ class BoardGamesController < ApplicationController
   end
 
   get "/board-games/:slug" do
-    @game = BoardGame.find_by(slug: params[:slug])
+    @game = get_game(params[:slug])
     @user = get_user
     erb :'board_games/show'
   end
 
   delete "/board-games/:slug" do
+    @game = get_game(params[:slug])
     @user = get_user
+    @user.board_games.select { |bg| bg != @game } if @user.board_games.include?(@game)
+  end
+
+  post "/board-games/:slug" do
+    @game = get_game(params[:slug])
+    @user = get_user
+    @user.board_games << @game unless @user.board_games.include?(@game)
   end
 end
