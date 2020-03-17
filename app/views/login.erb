@@ -3,18 +3,6 @@
     <div class="columns is-centered">
       <div class="column is-4">
         <h1 class="title">Login</h1>
-        <% if @error == "invalid" %>
-          <article class="message is-danger">
-            <div class="message-header">
-              <p>There was a problem signing into your account. Please try again.</p>
-            </div>
-            <div class="message-body">
-              <p>
-                Reminder: Usernames and Passwords must be between 3-12 characters long, and may only contain letters, numbers, hyphens, and underscores.
-              </p>
-            </div>
-          </article>
-        <% end %>
         <form action="/login" method="post">
           <div class="field">
             <label class="label">Username</label>
