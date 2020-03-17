@@ -16,6 +16,8 @@ class ApplicationController < Sinatra::Base
     if !!session[:user_id]
       redirect "/" # redirect to index if already logged in
     else
+      @error = session[:message]
+      session[:message].clear
       erb :signup
     end
   end
@@ -28,11 +30,34 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  def valid_username?(username)
+    unless User.find_by(username: username).nil?
+      session[:message] = "exists"
+      return false
+    end
+    return true if username.match(/[a-zA-Z0-9\-\_]{3,12}/)
+
+    session[:message] = "invalid"
+    return false
+  end
+
+  def valid_password?(password)
+    return true if password.match(/[a-zA-Z0-9\-\_]{3,12}/)
+    
+    session[:message] = "invalid"
+    return false
+  end
+
   post "/signup" do
-    if User.find_by(username: params[:username]).nil? && !params[:username].empty? && !params[:password].empty?
-      session[:user_id] = User.create(params).id
+    if valid_username?(params[:username]) && valid_password?(params[:password])
+      user = User.new(params)
+      user.slug = user.username.downcase.split(" ").join("-") 
+      user.save
+      session[:user_id] = user.id
+      
       redirect "/whoami"
     else
+      
       redirect "/signup"
     end
   end
@@ -43,6 +68,7 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = user.id
       redirect "/whoami"
     else
+      @error = true
       redirect "/login"
     end
   end
