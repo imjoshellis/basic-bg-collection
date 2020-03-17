@@ -5,21 +5,26 @@
       <p> <a href="<%= @game.bgg_url %>"><%= @game.bgg_url %></a> </p>
     <% end %>
     <p>Todo: pull description from bgg api</p>
+    <div class="buttons">
+    <a href="/board-games" class="button">
+      <span class="icon"><i class="fas fa-arrow-left"></i></span><span>Back</span>
+    </a>
     <% if @user.nil? %>
     <% elsif @user.board_games.include?(@game) %>
       <form method="post" action='/board-games/<%= @game.slug %>'>
         <input type="hidden" name="_method" value="DELETE">
-        <button type="submit" class="button is-danger is-outlined" id="delete">
+        <button type="submit" class="button is-danger" id="delete">
           <span class="icon"><i class="fas fa-minus-circle"></i></span><span>Remove</span>
         </button>
       </form>
     <% else %>
       <form method="post" action="/board-games/<%= @game.slug %>">
         <input type="hidden" name="_method" value="PATCH">
-        <button type="submit" class="button is-success is-outlined">
+        <button type="submit" class="button is-success">
           <span class="icon"><i class="fas fa-plus-circle"></i></span><span>Add</span>
         </button>
       </form>
     <% end %>
+    </div>
   </div>
 </section>
