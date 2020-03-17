@@ -7,14 +7,15 @@
     <p>Todo: pull description from bgg api</p>
     <% if @user.nil? %>
     <% elsif @user.board_games.include?(@game) %>
-      <form type="post" action="/board-games/<%= @game.slug %>">
+      <form method="post" action='/board-games/<%= @game.slug %>'>
         <input type="hidden" name="_method" value="DELETE">
-        <button type="submit" class="button is-danger is-outlined">
+        <button type="submit" class="button is-danger is-outlined" id="delete">
           <span class="icon"><i class="fas fa-minus-circle"></i></span><span>Remove</span>
         </button>
       </form>
     <% else %>
-      <form type="post" action="/board-games/<%= @game.slug %>">
+      <form method="post" action="/board-games/<%= @game.slug %>">
+        <input type="hidden" name="_method" value="PATCH">
         <button type="submit" class="button is-success is-outlined">
           <span class="icon"><i class="fas fa-plus-circle"></i></span><span>Add</span>
         </button>

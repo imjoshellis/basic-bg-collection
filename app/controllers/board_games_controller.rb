@@ -2,6 +2,7 @@ class BoardGamesController < ApplicationController
   def get_game(slug)
     BoardGame.find_by(slug: slug)
   end
+
   get "/board-games" do
     @user = get_user
     erb :'/board_games/index'
@@ -27,12 +28,20 @@ class BoardGamesController < ApplicationController
   delete "/board-games/:slug" do
     @game = get_game(params[:slug])
     @user = get_user
-    @user.board_games.select { |bg| bg != @game } if @user.board_games.include?(@game)
+    @user.board_games = @user.board_games.select { |bg| bg != @game } if @user.board_games.include?(@game)
+    redirect "/board-games/#{params[:slug]}"
   end
 
-  post "/board-games/:slug" do
+  patch "/board-games/:slug" do
     @game = get_game(params[:slug])
     @user = get_user
     @user.board_games << @game unless @user.board_games.include?(@game)
+    redirect "/board-games/#{params[:slug]}"
+  end
+
+  get "/board-games/:slug" do
+    @game = get_game(params[:slug])
+    @user = get_user
+    erb :'board_games/show'
   end
 end

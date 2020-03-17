@@ -6,14 +6,14 @@
         <div class="column is-1">
           <% if @user.nil? %>
           <% elsif @user.board_games.include?(bg) %>
-            <form type="post" action="/board-games/<%= bg.slug %>">
+            <form method="post" action="/board-games/<%= bg.slug %>">
               <input type="hidden" name="_method" value="DELETE">
               <button type="submit" class="button is-small is-fullwidth is-danger is-outlined">
                 <span class="icon"><i class="fas fa-minus-circle"></i></span><span>Remove</span>
               </button>
             </form>
           <% else %>
-            <form type="post" action="/board-games/<%= bg.slug %>">
+            <form method="post" action="/board-games/<%= bg.slug %>">
               <button type="submit" class="button is-success is-small is-fullwidth is-outlined">
                 <span class="icon"><i class="fas fa-plus-circle"></i></span><span>Add</span>
               </button>
