@@ -3,6 +3,7 @@
   <% if @user %>
     <p> id: <%= @user.id %> </p>
     <p> username: <%= @user.username %> </p>
+    <p> slug: <%= @user.slug %> </p>
     <p> board_games:</p>
     <ul>
       <% if @user.board_games.size < 1 %>
