@@ -17,6 +17,6 @@ class BoardGamesController < ApplicationController
 
   get "/board-games/:slug" do
     @game = BoardGame.find_by(slug: params[:slug])
-    erb :show
+    erb :'board_games/show'
   end
 end
