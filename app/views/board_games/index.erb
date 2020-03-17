@@ -2,12 +2,21 @@
   <div class="container content">
       <h1 class="title">All Board Games</h1>
       <% BoardGame.all.each do |bg| %>
-          <h3 class="title">
-              <%= bg.name %>
-          </h3>
-          <span class="subtitle">
-              <%= bg.bgg_url %>
-          </span>
+          <div class="columns">
+              <div class="column is-narrow">
+                  <h3 class="title">
+                      <%= bg.name %>
+                  </h3>
+              </div>
+              <div class="column buttons are-small is-narrow">
+                  <a class="button is-success is-outlined is-light">
+                      <span class="icon"><i class="fas fa-plus-circle"></i></span><span>Add to your collection</span>
+                  </a>
+          <a href="<%= bg.bgg_url %>" class="button is-info is-outlined is-light" <% "disabled" if bg.bgg_url.empty? %>>
+              <span class="icon"><i class="fas fa-external-link-alt"></i></span><span>View on BGG</span>
+          </a>
+              </div>
+          </div>
       <% end %>
   </div>
 </section>
