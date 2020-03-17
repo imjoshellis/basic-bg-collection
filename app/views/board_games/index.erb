@@ -1,0 +1,48 @@
+<section class="section is-medium has-background-light">
+  <div class="container content">
+      <h1 class="title">All Board Games</h1>
+      <% BoardGame.all.each do |bg| %>
+          <div class="columns">
+              <div class="column is-narrow">
+                  <h3 class="title">
+                      <a href="/board-games/<%= bg.slug %>">
+                      <%= bg.name %></a>
+                  <span class="tag ">
+                      (in <%= bg.users.size %> collection<% bg.users.size > 1 ? "s" : "" %>)
+                  </span>
+                  </h3>
+              </div>
+              <div class="column buttons are-small is-narrow">
+                  <% if @user.nil? %>
+                  <% elsif @user.board_games.include?(bg) %>
+                      <form type="post" action="/board-games/<%= bg.slug %>">
+                          <input type="hidden" name="_method" value="DELETE">
+                  <button type="submit" class="button is-danger is-outlined">
+                      <span class="icon"><i class="fas fa-minus-circle"></i></span><span>Remove from your collection</span>
+                  </button>
+                      </form>
+                      <% else %>
+                      <form type="post" action="/board-games/<%= bg.slug %>">
+                          <input type="hidden" name="_method" value="ADD">
+                  <button type="submit" class="button is-success is-outlined">
+                      <span class="icon"><i class="fas fa-plus-circle"></i></span><span>Add to your collection</span>
+                  </button>
+                      </form>
+                  <% end %>
+          <a href="<%= bg.bgg_url %>" class="button is-info is-outlined is-light" <% "disabled" if bg.bgg_url.empty? %>>
+              <span class="icon"><i class="fas fa-external-link-alt"></i></span><span>View on BGG</span>
+          </a>
+              </div>
+          </div>
+      <% end %>
+      <% unless @user.nil? %>
+      <div class="container">
+          <a href="/board-games/new" class="button is-success"><span class="icon">
+              <i class="fas fa-plus-circle"></i>
+          </span>
+          <span>Add new game to your collection</span>
+          </a>
+      </div>
+      <% end %>
+  </div>
+</section>
