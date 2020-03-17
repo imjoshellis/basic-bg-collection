@@ -1,0 +1,12 @@
+<section class="section is-medium has-background-light">
+  <div class="container content">
+      <% BoardGame.all.each do |bg| %>
+          <h3 class="title">
+              <%= bg.name %>
+          </h3>
+          <span class="subtitle">
+              <%= bg.bgg_url %>
+          </span>
+      <% end %>
+  </div>
+</section>
