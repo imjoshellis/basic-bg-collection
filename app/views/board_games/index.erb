@@ -14,6 +14,7 @@
             </form>
           <% else %>
             <form method="post" action="/board-games/<%= bg.slug %>">
+              <input type="hidden" name="_method" value="PATCH">
               <button type="submit" class="button is-success is-small is-fullwidth is-outlined">
                 <span class="icon"><i class="fas fa-plus-circle"></i></span><span>Add</span>
               </button>

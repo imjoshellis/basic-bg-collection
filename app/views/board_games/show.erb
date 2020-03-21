@@ -1,7 +1,9 @@
 <section class="section has-background-light">
   <div class="container content">
     <h1 class="title"><%= @game.name %></h1>
-    <% unless @game.bgg_url.nil? %>
+    <% if @game.bgg_url.nil? %>
+      <p> No url </p>
+    <% else %>
       <p> <a href="<%= @game.bgg_url %>"><%= @game.bgg_url %></a> </p>
     <% end %>
     <p>Todo: pull description from bgg api</p>
