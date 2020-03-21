@@ -13,6 +13,10 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
+    if session[:user_id].nil?
     erb :index
+    else
+      redirect '/board-games'
+    end
   end
 end
