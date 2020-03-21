@@ -13,6 +13,8 @@ class BoardGamesController < ApplicationController
   end
 
   get "/board-games/new" do
+    @error = session[:message].dup
+    session[:message]&.clear
     erb :'board_games/new'
   end
 
