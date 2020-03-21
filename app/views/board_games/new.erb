@@ -3,13 +3,23 @@
     <div class="columns is-centered">
       <div class="column is-6">
         <h1 class="title">Signup</h1>
-        <% if @error == "invalid" %>
+        <% if @error == "invalid_url" %>
           <article class="message is-danger">
             <div class="message-header">
               <p>There was a problem verifying the BGG Url you submitted</p>
             </div>
             <div class="message-body">
               <p>BGG Url is optional. Feel free to leave it off if you're having issues with it.</p>
+            </div>
+          </article>
+        <% elsif @error == "invalid_name" %>
+          <article class="message is-danger">
+            <div class="message-header">
+              <p>There was a problem with the name of your game</p>
+            </div>
+            <div class="message-body">
+              <p>Names must consist of only letters, numbers and the following special characters: !, &, ?, (), :</p>
+              <p>If the game you're trying to add uses characters other than those, please try to use substitute characters.</p>
             </div>
           </article>
         <% elsif @error == "exists" %>
