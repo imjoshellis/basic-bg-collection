@@ -22,7 +22,7 @@
           <div class="column is-3 has-text-right">
             <% if session[:user_id] %>
               <span>
-                Logged in as <a href="/users/<%= session[:user_id] %>" class="has-text-weight-bold"><%= User.find(session[:user_id]).username %></a>
+                Logged in as <a href="/users/<%= User.find(session[:user_id]).slug %>" class="has-text-weight-bold"><%= User.find(session[:user_id]).username %></a>
               </span><br>
               <a href="/logout"><span>Logout</span></a>
             <% else %>

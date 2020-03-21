@@ -74,6 +74,11 @@ class UsersController < ApplicationController
     erb :whoami
   end
 
+  get "/users/:slug" do
+    @user = User.find_by(slug: params[:slug])
+    erb :'/users/show'
+  end
+
   get "/logout" do
     session.clear
     redirect "/"
