@@ -1,0 +1,30 @@
+<section class="section is-medium has-background-light">
+  <div class="container content">
+    <h1 class="title">All Users</h1>
+    <% User.all.each do |u| %>
+      <div class="columns">
+        <div class="column is-narrow">
+          <h3 class="title is-marginless">
+            <a href="/users/<%= u.slug %>">
+              <%= u.username %></a>
+              <% if u.board_games.size > 0 %>
+            <span class="tag ">
+              <% u.board_games.size > 1 ? @g = "games" : @g = "game" %>
+              (<%= u.board_games.size.to_s + " " + @g %> in collection)
+            </span>
+            <% end %>
+          </h3>
+        </div>
+      </div>
+    <% end %>
+    <% if session[:user_id].nil? %>
+      <div class="container">
+      <a href="/signup">
+        <button class="button is-primary">
+          <span class="icon"><i class="fas fa-user-plus"></i></span><span>Signup</span>
+        </button>
+      </a>
+      </div>
+    <% end %>
+  </div>
+</section>

@@ -17,12 +17,14 @@
       <div class="container content">
         <div class="columns is-vcentered">
             <div class="column is-9">
+              <a href="/">
                 <span class="title">Basic Board Game Collection</span>
+              </a>
             </div>
           <div class="column is-3 has-text-right">
             <% if session[:user_id] %>
               <span>
-                Logged in as <a href="/users/<%= session[:user_id] %>/edit" class="has-text-weight-bold"><%= User.find(session[:user_id]).username %></a>
+                Logged in as <a href="/users/<%= User.find(session[:user_id]).slug %>" class="has-text-weight-bold"><%= User.find(session[:user_id]).username %></a>
               </span><br>
               <a href="/logout"><span>Logout</span></a>
             <% else %>

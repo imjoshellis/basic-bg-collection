@@ -1,0 +1,41 @@
+<section class="section has-background-light">
+  <div class="container content">
+    <h1 class="title"><%= @user.username %>'s Collection</h1>
+    <% BoardGame.all.each do |bg| %>
+          <% if @user.board_games.include?(bg) %>
+      <div class="columns">
+        <div class="column is-narrow">
+          <h3 class="title is-marginless">
+            <a href="/board-games/<%= bg.slug %>">
+              <%= bg.name %></a>
+            <span class="tag ">
+              <% bg.users.size > 1 ? @c = "collections" : @c = "collection" %>
+              (in <%= bg.users.size.to_s + " " + @c %>)
+            </span>
+          </h3>
+          <% unless bg.bgg_url.empty? %>
+            <a href="<%= bg.bgg_url %>" class="has-text-grey is-size-7" target="_blank">
+              <span class="icon"><i class="fas fa-external-link-alt"></i></span><span>View more info on BGG</span>
+            </a>
+          <% end %>
+        </div>
+        <div class="column is-2">
+          <% if @user == User.find_by(session[:user_id]) %>
+            <form method="post" action="/board-games/<%= bg.slug %>">
+              <input type="hidden" name="_method" value="DELETE">
+              <button type="submit" class="button is-small is-fullwidth is-danger is-outlined">
+                <span class="icon"><i class="fas fa-minus-circle"></i></span><span>Remove</span>
+              </button>
+            </form>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <% end %>
+    <div class="buttons">
+    <a href="/users" class="button">
+      <span class="icon"><i class="fas fa-arrow-left"></i></span><span>All Users</span>
+    </a>
+    </div>
+    </div>
+</section>
