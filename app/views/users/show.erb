@@ -4,16 +4,6 @@
     <% BoardGame.all.each do |bg| %>
           <% if @user.board_games.include?(bg) %>
       <div class="columns">
-        <div class="column is-2">
-          <% if @user == User.find_by(session[:user_id]) %>
-            <form method="post" action="/board-games/<%= bg.slug %>">
-              <input type="hidden" name="_method" value="DELETE">
-              <button type="submit" class="button is-small is-fullwidth is-danger is-outlined">
-                <span class="icon"><i class="fas fa-minus-circle"></i></span><span>Remove</span>
-              </button>
-            </form>
-          <% end %>
-        </div>
         <div class="column is-narrow">
           <h3 class="title is-marginless">
             <a href="/board-games/<%= bg.slug %>">
@@ -29,12 +19,22 @@
             </a>
           <% end %>
         </div>
+        <div class="column is-2">
+          <% if @user == User.find_by(session[:user_id]) %>
+            <form method="post" action="/board-games/<%= bg.slug %>">
+              <input type="hidden" name="_method" value="DELETE">
+              <button type="submit" class="button is-small is-fullwidth is-danger is-outlined">
+                <span class="icon"><i class="fas fa-minus-circle"></i></span><span>Remove</span>
+              </button>
+            </form>
+          <% end %>
+        </div>
       </div>
     <% end %>
     <% end %>
     <div class="buttons">
-    <a href="/board-games" class="button">
-      <span class="icon"><i class="fas fa-arrow-left"></i></span><span>Back</span>
+    <a href="/users" class="button">
+      <span class="icon"><i class="fas fa-arrow-left"></i></span><span>All Users</span>
     </a>
     </div>
     </div>
