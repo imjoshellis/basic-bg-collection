@@ -14,21 +14,16 @@
             </span>
             <% end %>
           </h3>
-          <% unless bg.bgg_url.empty? %>
-            <a href="<%= bg.bgg_url %>" class="has-text-grey is-size-7" target="_blank">
-              <span class="icon"><i class="fas fa-external-link-alt"></i></span><span>View more info on BGG</span>
-            </a>
-          <% end %>
         </div>
       </div>
     <% end %>
-    <% unless @user.nil? %>
+    <% if session[:user_id].nil? %>
       <div class="container">
-        <a href="/board-games/new" class="button is-success"><span class="icon">
-            <i class="fas fa-plus-circle"></i>
-          </span>
-          <span>Add new game</span>
-        </a>
+      <a href="/signup">
+        <button class="button is-primary">
+          <span class="icon"><i class="fas fa-user-plus"></i></span><span>Signup</span>
+        </button>
+      </a>
       </div>
     <% end %>
   </div>
