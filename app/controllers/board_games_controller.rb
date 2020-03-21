@@ -20,10 +20,15 @@ class BoardGamesController < ApplicationController
   # check bgg url
   post "/board-games/new" do
     slug = params[:name].downcase.split(/\s/).collect { |w| w.split(/[^a-zA-Z0-9]+/).join("") }.join("-")
+
+    if slug.match?(/^[a-z0-9\:\&\!]/)
+      session[:message] = "invalid_name"
+      redirect "/board-games/new"
+    end
     if params[:bgg_url].size > 0 && params[:bgg_url].downcase.match?(/.*boardgamegeek.com\/boardgame\/[0-9]+/)
       bgg_url = params[:bgg_url]
     else
-      session[:message] = "invalid"
+      session[:message] = "invalid_url"
       redirect "/board-games/new"
     end
 
