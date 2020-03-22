@@ -23,6 +23,7 @@ class UsersController < ApplicationController
       session[:message] = "exists"
       false
     end
+    true
   end
 
   def valid_username?(username)
@@ -48,7 +49,7 @@ class UsersController < ApplicationController
         user.save
         session[:user_id] = user.id
 
-        redirect "/whoami"
+        redirect "/board-games"
       end
     end
     redirect "/signup"
@@ -67,11 +68,6 @@ class UsersController < ApplicationController
     end
 
     redirect "/login"
-  end
-
-  get "/whoami" do
-    @user = get_user
-    erb :whoami
   end
 
   get "/users" do
