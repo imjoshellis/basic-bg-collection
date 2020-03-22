@@ -19,16 +19,16 @@
             </a>
           <% end %>
         </div>
+          <% if @user == User.find(session[:user_id]) %>
         <div class="column is-2">
-          <% if @user == User.find_by(session[:user_id]) %>
             <form method="post" action="/board-games/<%= bg.slug %>">
               <input type="hidden" name="_method" value="DELETE">
               <button type="submit" class="button is-small is-fullwidth is-danger is-outlined">
                 <span class="icon"><i class="fas fa-minus-circle"></i></span><span>Remove</span>
               </button>
             </form>
-          <% end %>
         </div>
+          <% end %>
       </div>
     <% end %>
     <% end %>
