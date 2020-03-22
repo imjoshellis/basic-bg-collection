@@ -14,7 +14,7 @@ Keep track of your board game collection, including which games you own and when
   
 ## Demo
 
-View a demo of this app [here](https://youtube.com/#) (to be added)
+View a demo of this app [here](https://www.loom.com/share/e1cd772dfd55402d80f9bf01c3dd07e2)
 
 ## Description
 
