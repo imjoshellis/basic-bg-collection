@@ -57,7 +57,6 @@ class UsersController < ApplicationController
   end
 
   post "/login" do
-    binding.pry
     if valid_username?(params[:username])
       slug = params[:username].downcase
       user = User.find_by(slug: slug)
