@@ -13,7 +13,7 @@
               (in <%= bg.users.size.to_s + " " + @c %>)
             </span>
           </h3>
-          <% unless bg.bgg_url.empty? %>
+          <% unless bg.bgg_url.nil? %>
             <a href="<%= bg.bgg_url %>" class="has-text-grey is-size-7" target="_blank">
               <span class="icon"><i class="fas fa-external-link-alt"></i></span><span>View more info on BGG</span>
             </a>
