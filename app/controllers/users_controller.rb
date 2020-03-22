@@ -60,7 +60,7 @@ class UsersController < ApplicationController
     binding.pry
     if valid_username?(params[:username])
       slug = params[:username].downcase
-      user = User.find_by(slug)
+      user = User.find_by(slug: slug)
       if user&.authenticate(params[:password])
         session[:user_id] = user.id
         redirect "/users/#{user.slug}"
