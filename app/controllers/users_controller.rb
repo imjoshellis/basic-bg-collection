@@ -57,12 +57,13 @@ class UsersController < ApplicationController
   end
 
   post "/login" do
+    binding.pry
     if valid_username?(params[:username])
       slug = params[:username].downcase
-      user = User.find_by(slug: params[:slug])
+      user = User.find_by(slug)
       if user&.authenticate(params[:password])
         session[:user_id] = user.id
-        redirect "/whoami"
+        redirect "/users/#{user.slug}"
       else
         session[:message] = "invalid"
       end
