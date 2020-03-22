@@ -42,7 +42,6 @@ class UsersController < ApplicationController
   end
 
   post "/signup" do
-    binding.pry
     if valid_username?(params[:username])
       slug = params[:username].downcase
       if valid_new_username?(slug) && valid_password?(params[:password])
