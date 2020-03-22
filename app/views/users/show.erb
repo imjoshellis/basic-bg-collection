@@ -1,8 +1,8 @@
 <section class="section has-background-light">
   <div class="container content">
     <h1 class="title"><%= @user.username %></h1>
-    <h2 class="subtitle">Bio</h2>
           <% if @user == User.find(session[:user_id]) %>
+    <h2 class="subtitle">Bio</h2>
           <% if @user.bio.nil? %>
           <div class="columns">
         <div class="column is-6">
@@ -35,8 +35,9 @@
             </div>
             </div>
           <% end %>
-        <% else %>
-    <p><%= @user.bio unless @user.bio.nil? %></p>
+        <% elsif !@user.bio.nil? %>
+    <h2 class="subtitle">Bio</h2>
+    <p><%= @user.bio %></p>
           <% end %>
     <h2 class="title">Collection</h2>
     <% BoardGame.all.each do |bg| %>
