@@ -75,12 +75,12 @@ end
 josh = User.find_by(username: "josh")
 josh.board_games << BoardGame.find_by(slug: "kemet")
 josh.board_games << BoardGame.find_by(slug: "inis")
-anna.board_games << BoardGame.find_by(slug: "parks")
+josh.board_games << BoardGame.find_by(slug: "parks")
 josh.board_games << BoardGame.find_by(slug: "takenoko")
 
 anna = User.find_by(username: "anna")
 anna.board_games << BoardGame.find_by(slug: "kemet")
-josh.board_games << BoardGame.find_by(slug: "inis")
+anna.board_games << BoardGame.find_by(slug: "inis")
 anna.board_games << BoardGame.find_by(slug: "parks")
 anna.board_games << BoardGame.find_by(slug: "takenoko")
 
