@@ -19,11 +19,12 @@ class UsersController < ApplicationController
   end
 
   def valid_new_username?(slug)
-    unless User.find_by(slug: slug).nil?
+    if User.find_by(slug: slug).nil?
+      true
+    else
       session[:message] = "exists"
       false
     end
-    true
   end
 
   def valid_username?(username)
@@ -41,6 +42,7 @@ class UsersController < ApplicationController
   end
 
   post "/signup" do
+    binding.pry
     if valid_username?(params[:username])
       slug = params[:username].downcase
       if valid_new_username?(slug) && valid_password?(params[:password])
