@@ -39,7 +39,7 @@ class BoardGamesController < ApplicationController
     end
 
     if get_game(slug)
-      session[:message] = "exsists"
+      session[:message] = "exists"
       redirect "/board-games/new"
     else
       @game = BoardGame.new(name: params[:name], slug: slug)
