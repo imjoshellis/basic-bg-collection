@@ -84,4 +84,29 @@ class UsersController < ApplicationController
     session.clear
     redirect "/"
   end
+
+  post "/users/:slug" do 
+    @user = User.find_by(slug: params[:slug])
+    if params[:bio].size > 0 && @user = User.find(session[:user_id])
+      @user.bio = params[:bio]
+      @user.save
+      redirect "/users/#{@user.slug}"
+    end
+  end
+
+  patch "/users/:slug" do 
+    @user = User.find_by(slug: params[:slug])
+    if params[:bio].size > 0 && @user = User.find(session[:user_id])
+      User.update(@user.id, bio: params[:bio])
+      redirect "/users/#{@user.slug}"
+    end
+  end
+  
+  delete "/users/:slug" do 
+    @user = User.find_by(slug: params[:slug])
+    if @user = User.find(session[:user_id])
+      User.update(@user.id, bio: nil)
+      redirect "/users/#{@user.slug}"
+    end
+  end
 end

@@ -2,22 +2,26 @@ user_list = {
   "josh" => {
     username: "josh",
     slug: "josh",
-    password: "josh"
+    password: "josh",
+    bio: "I love board games and national parks!"
   },
   "anna" => {
     username: "anna",
     slug: "anna",
-    password: "anna"
+    password: "anna",
+    bio: "I'm a professional dancer, and my favorite board game is PARKS!"
   },
   "joe" => {
     username: "joe",
     slug: "joe",
-    password: "joe"
+    password: "joe",
+    bio: "I would play Great Western Trail every day if I could."
   },
   "don" => {
     username: "don",
     slug: "don",
-    password: "don"
+    password: "don",
+    bio: "I'm new to board games"
   }
 }
 
@@ -55,6 +59,11 @@ board_game_list = {
     name: "Century: Spice Road",
     slug: "century-spice-road",
     bgg_url: "https://boardgamegeek.com/boardgame/209685/century-spice-road"
+  },
+  "PARKS" => {
+    name: "PARKS",
+    slug: "parks",
+    bgg_url: "https://boardgamegeek.com/boardgame/266524/parks"
   }
 
 }
@@ -66,11 +75,13 @@ end
 josh = User.find_by(username: "josh")
 josh.board_games << BoardGame.find_by(slug: "kemet")
 josh.board_games << BoardGame.find_by(slug: "inis")
+anna.board_games << BoardGame.find_by(slug: "parks")
 josh.board_games << BoardGame.find_by(slug: "takenoko")
 
 anna = User.find_by(username: "anna")
 anna.board_games << BoardGame.find_by(slug: "kemet")
-anna.board_games << BoardGame.find_by(slug: "inis")
+josh.board_games << BoardGame.find_by(slug: "inis")
+anna.board_games << BoardGame.find_by(slug: "parks")
 anna.board_games << BoardGame.find_by(slug: "takenoko")
 
 joe = User.find_by(username: "joe")

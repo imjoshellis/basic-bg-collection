@@ -1,6 +1,44 @@
 <section class="section has-background-light">
   <div class="container content">
-    <h1 class="title"><%= @user.username %>'s Collection</h1>
+    <h1 class="title"><%= @user.username %></h1>
+    <h2 class="subtitle">Bio</h2>
+          <% if @user == User.find(session[:user_id]) %>
+          <% if @user.bio.nil? %>
+          <div class="columns">
+        <div class="column is-6">
+            <form method="post" action="/users/<%= @user.slug %>">
+              <textarea name="bio" id="bio" class="textarea"></textarea>
+              <button type="submit" class="button is-small is-fullwidth is-primary is-outlined">
+                <span class="icon"><i class="fas fa-edit"></i></span><span>Create Bio</span>
+              </button>
+            </form></div>
+            </div>
+          <% else %>
+          <div class="columns">
+        <div class="column is-6">
+            <form method="post" action="/users/<%= @user.slug %>">
+              <input type="hidden" name="_method" value="PATCH">
+              <textarea name="bio" id="bio" class="textarea"><%= @user.bio %></textarea>
+              <button type="submit" class="button is-small is-fullwidth is-primary is-outlined">
+                <span class="icon"><i class="fas fa-edit"></i></span><span>Update Bio</span>
+              </button>
+            </form></div>
+            </div>
+          <div class="columns">
+        <div class="column is-6">
+            <form method="post" action="/users/<%= @user.slug %>">
+              <input type="hidden" name="_method" value="DELETE">
+              <button type="submit" class="button is-small is-fullwidth is-danger is-outlined">
+                <span class="icon"><i class="fas fa-minus-circle"></i></span><span>Delete Bio</span>
+              </button>
+            </form>
+            </div>
+            </div>
+          <% end %>
+        <% else %>
+    <p><%= @user.bio unless @user.bio.nil? %></p>
+          <% end %>
+    <h2 class="title">Collection</h2>
     <% BoardGame.all.each do |bg| %>
           <% if @user.board_games.include?(bg) %>
       <div class="columns">
