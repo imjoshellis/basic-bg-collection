@@ -59,7 +59,7 @@ class BoardGamesController < ApplicationController
   delete "/board-games/:slug" do
     @game = get_game(params[:slug])
     @user = get_user
-    @user.board_games = @user.board_games.select { |bg| bg != @game } if @user.board_games.include?(@game)
+    @user.board_games.delete(@game)
     redirect "/board-games/#{params[:slug]}"
   end
 
