@@ -17,58 +17,28 @@ class UsersController < ApplicationController
     auth_routing
     erb :login
   end
-  # https://learn.co/tracks/full-stack-web-development-v8/module-13-rails/section-6-validations-and-forms/activerecord-validations
-  def valid_new_username?(slug)
-    if User.find_by(slug: slug).nil?
-      true
-    else
-      session[:message] = "exists"
-      false
-    end
-  end
-
-  def valid_username?(username)
-    return true if /[a-zA-Z0-9\-\_]{3,12}/.match?(username)
-
-    session[:message] = "invalid"
-    false
-  end
-
-  def valid_password?(password)
-    return true if /[a-zA-Z0-9\-\_]{3,12}/.match?(password)
-
-    session[:message] = "invalid"
-    false
-  end
 
   post "/signup" do
-    if valid_username?(params[:username])
-      slug = params[:username].downcase
-      if valid_new_username?(slug) && valid_password?(params[:password])
-        user = User.new(params)
-        user.slug = slug
-        user.save
-        session[:user_id] = user.id
+    slug = params[:username].downcase
+    @user = User.create(username: params[:username], password: params[:password], slug: slug)
 
-        redirect "/board-games"
-      end
+    if @user.errors.size == 0
+      session[:user_id] = @user.id
+      redirect "/board-games"
+    else
+      erb :signup
     end
-    redirect "/signup"
   end
 
   post "/login" do
-    if valid_username?(params[:username])
-      slug = params[:username].downcase
-      user = User.find_by(slug: slug)
-      if user&.authenticate(params[:password])
-        session[:user_id] = user.id
-        redirect "/users/#{user.slug}"
-      else
-        session[:message] = "invalid"
-      end
+    @user = User.find_by(slug: slug)
+    if @user&.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect "/users/#{@user.slug}"
+    else
+      session[:message] = "invalid"
+      redirect "/login"
     end
-
-    redirect "/login"
   end
 
   get "/users" do
