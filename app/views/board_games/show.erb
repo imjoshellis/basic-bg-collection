@@ -7,6 +7,16 @@
       <p> <a href="<%= @game.bgg_url %>"><%= @game.bgg_url %></a> </p>
     <% end %>
     <p>Todo: pull description from bgg api</p>
+    <% if @game.users.size > 0 %>
+    <h3>Other Users Who Have This Game</h3>
+    <ul>
+    <% @game.users.each do |user| %>
+    <% unless user == @user %>
+    <li><%= user.username  %></li>
+    <% end %>
+    <% end %>
+    </ul>
+    <% end %>
     <div class="buttons">
     <a href="/board-games" class="button">
       <span class="icon"><i class="fas fa-arrow-left"></i></span><span>Back</span>

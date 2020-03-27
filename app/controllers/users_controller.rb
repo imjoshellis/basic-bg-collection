@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     auth_routing
     erb :login
   end
-
+  # https://learn.co/tracks/full-stack-web-development-v8/module-13-rails/section-6-validations-and-forms/activerecord-validations
   def valid_new_username?(slug)
     if User.find_by(slug: slug).nil?
       true
@@ -85,7 +85,7 @@ class UsersController < ApplicationController
     redirect "/"
   end
 
-  post "/users/:slug" do 
+  post "/users/:slug" do
     @user = User.find_by(slug: params[:slug])
     if params[:bio].size > 0 && @user = User.find(session[:user_id])
       @user.bio = params[:bio]
@@ -94,15 +94,15 @@ class UsersController < ApplicationController
     end
   end
 
-  patch "/users/:slug" do 
+  patch "/users/:slug" do
     @user = User.find_by(slug: params[:slug])
     if params[:bio].size > 0 && @user = User.find(session[:user_id])
       User.update(@user.id, bio: params[:bio])
       redirect "/users/#{@user.slug}"
     end
   end
-  
-  delete "/users/:slug" do 
+
+  delete "/users/:slug" do
     @user = User.find_by(slug: params[:slug])
     if @user = User.find(session[:user_id])
       User.update(@user.id, bio: nil)
