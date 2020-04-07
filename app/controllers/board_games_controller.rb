@@ -66,7 +66,9 @@ class BoardGamesController < ApplicationController
   patch "/board-games/:slug" do
     @game = get_game(params[:slug])
     @user = get_user
-    @user.board_games << @game unless @user.board_games.include?(@game)
+    unless @user.board_games.include?(@game)
+      UserGame.create(user_id: @user.id, board_game_id: @game.id)
+    end
     redirect "/board-games/#{params[:slug]}"
   end
 

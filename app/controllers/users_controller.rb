@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   end
 
   post "/login" do
-    @user = User.find_by(slug: slug)
+    @user = User.find_by(username: params[:username])
     if @user&.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect "/users/#{@user.slug}"
@@ -67,8 +67,7 @@ class UsersController < ApplicationController
   patch "/users/:slug" do
     @user = User.find_by(slug: params[:slug])
     if params[:bio].size > 0 && @user = User.find(session[:user_id])
-      @user.update(bio: params[:bio])
-      @user.save
+      @user.update_attribute(:bio, params[:bio])
       redirect "/users/#{@user.slug}"
     end
   end
@@ -76,8 +75,7 @@ class UsersController < ApplicationController
   delete "/users/:slug" do
     @user = User.find_by(slug: params[:slug])
     if @user = User.find(session[:user_id])
-      @user.bio.clear
-      @user.save
+      @user.update_attribute(:bio, "")
       redirect "/users/#{@user.slug}"
     end
   end
