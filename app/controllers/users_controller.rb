@@ -67,7 +67,8 @@ class UsersController < ApplicationController
   patch "/users/:slug" do
     @user = User.find_by(slug: params[:slug])
     if params[:bio].size > 0 && @user = User.find(session[:user_id])
-      User.update(@user.id, bio: params[:bio])
+      @user.update(bio: params[:bio])
+      @user.save
       redirect "/users/#{@user.slug}"
     end
   end
@@ -75,7 +76,8 @@ class UsersController < ApplicationController
   delete "/users/:slug" do
     @user = User.find_by(slug: params[:slug])
     if @user = User.find(session[:user_id])
-      User.update(@user.id, bio: nil)
+      @user.bio.clear
+      @user.save
       redirect "/users/#{@user.slug}"
     end
   end
